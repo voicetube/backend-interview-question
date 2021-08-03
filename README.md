@@ -7,15 +7,15 @@ In this test, you have to fulfill all exceptions and completes tests successfull
 ## Setup
 1. Create new repository with this template. (Please do not use any words related to `Voicetube`)
 2. Run `docker-compose up -d --build`
-3. Run `docker-compose exec app composer run test`
-4. Make all tests passed successfully
-
 
 ## Development Requirement
 
-1. Complete it with `Laravel 8`, `PHP 8`, `Nginx` and `MySql 8`
+1. Complete it with `Laravel 8`, `PHP 8`, `Nginx` and `MySQL 8`
 2. API that modifies data *must* be protected by tokens
 
+## Definition of done
+1. Run `docker-compose exec app composer run test`
+2. Make all tests passed successfully
 
 ### API List
  
@@ -34,7 +34,7 @@ In this test, you have to fulfill all exceptions and completes tests successfull
 
 ### Notice
 
-We highly value the quality of the assignment, and we understand that candidates have their commitments. Hence should you require more time to complete the assignment to the best of your ability, please feel free to let us know.
+We highly value the quality of the assignment, and we understand that candidates have their commitments. Hence should you require more information to complete the assignment to the best of your ability, please feel free to let us know.
 
 ## License
 
