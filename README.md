@@ -7,6 +7,7 @@ In this test, you have to fulfill all exceptions and completes tests successfull
 ## Setup
 1. Create new repository with this template. (Please `DO NOT` use any words related to `Voicetube`)
 2. Run `docker-compose up -d --build`
+2. Run `docker-compose exec app php artisan migrate`
 3. Uncomment the lines in `routes/api.php` and create your class by the route list
 
 ## Development Requirement
