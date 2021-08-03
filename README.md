@@ -4,24 +4,27 @@ Build a RESTful-API ecosystem for a to-do list.
 ## Object
 In this test, you have to fulfill all exceptions and completes tests successfully. Following rules are your mission:
 
-## Setup
+1. Follow the `Setup`, `Development Requirement` to create your code
+2. Finish the test by following `Definition of done`
+
+### Setup
 1. Create new repository with this template. (Please `DO NOT` use any words related to `Voicetube`)
 2. Run `docker-compose up -d --build`
 2. Run `docker-compose exec app php artisan migrate`
 3. Uncomment the lines in `routes/api.php` and create your class by the route list
 
-## Development Requirement
+#### Development Requirement
 
 1. Complete it with `Laravel 8`, `PHP 8`, `Nginx` and `MySQL 8`
 2. API that modifies data *must* be protected by tokens
 3. Finish the test with current design pattern
 4. Follow PSR-12 for coding style
 
-## Definition of done
+### Definition of done
 1. Run `docker-compose exec app composer run test`
 2. Make all tests passed successfully
 
-### API List
+#### API List
  
 * Get all to-do lists belong to authenticated user, sort by created time
 * Get one to-do list
