@@ -45,4 +45,5 @@ We highly value the quality of the assignment, and we understand that candidates
 
 ## License
 
-Copyright © 2021 VoiceTube Corporation. All rights reserved
+Copyright © 2021 VoiceTube Corporation. All rights reserved.
+The source code is licensed under [MIT license](https://mit-license.org/).
