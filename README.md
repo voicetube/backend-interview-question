@@ -1,17 +1,27 @@
 # Backend Interview Test
 Build a RESTful-API ecosystem for a to-do list.
 
-## Object
-In this test, you have to fulfill all exceptions and completes tests successfully. Following rules are your mission:
+- [Backend Interview Test](#backend-interview-test)
+  - [Object](#object)
+    - [Setup](#setup)
+      - [Development Requirement](#development-requirement)
+    - [Definition of done](#definition-of-done)
+      - [API List](#api-list)
+    - [Notice](#notice)
+  - [License](#license)
 
-1. Follow the `Setup`, `Development Requirement` to create your code
-2. Finish the test by following `Definition of done`
+
+## Object
+In this test, you have to fulfill all exceptions and complete tests successfully. Following rules are your mission:
+
+1. Follow the [`Setup`](#setup), [`Development Requirement`](#development-requirement) to create your code
+2. Finish the test by following [`Definition of done`](#definition-of-done)
 
 ### Setup
 1. Create new repository with this template. (Please `DO NOT` use any words related to `Voicetube`)
 2. Run `docker-compose up -d --build`
-2. Run `docker-compose exec app php artisan migrate`
-3. Uncomment the lines in `routes/api.php` and create your class by the route list
+3. Run `docker-compose exec app php artisan migrate`
+4. Uncomment the lines in `routes/api.php` and create your class by the route list
 
 #### Development Requirement
 
@@ -25,7 +35,7 @@ In this test, you have to fulfill all exceptions and completes tests successfull
 2. Make all tests passed successfully
 
 #### API List
- 
+
 * Get all to-do lists belong to authenticated user, sort by created time
 * Get one to-do list
 * Create one to-do list
@@ -46,4 +56,5 @@ We highly value the quality of the assignment, and we understand that candidates
 ## License
 
 Copyright © 2021 VoiceTube Corporation. All rights reserved.
+
 The source code is licensed under [MIT license](https://mit-license.org/).
