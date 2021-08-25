@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Todo;
 use App\Models\TodoItem;
@@ -49,6 +50,26 @@ test('can refresh JWT token', function () use ($createUserWithData) {
     ]);
 });
 
+test('can get token status', function () use ($createUserWithData) {
+    $user = $createUserWithData(createRelationData: true);
+    auth()->guard()->login($user);
+    $this->assertAuthenticated();
+    $this->actingAs($user);
+
+    $response = $this->get('/api/auth/token');
+    $response->assertSuccessful();
+
+    $payload = auth()->getPayload();
+    $tokenStatus = collect([
+        'expired_at' => $payload->get('exp'),
+        'not_before_at' => $payload->get('nbf'),
+        'issued_at' => $payload->get('iat'),
+    ])
+        ->map(fn($value) => Carbon::createFromTimestamp($value)->toIso8601ZuluString());
+
+    $response->assertExactJson($tokenStatus->toArray());
+});
+
 test('can get user name and email', function () use ($createUserWithData) {
     $user = $createUserWithData(createRelationData: true);
     auth()->guard()->login($user);
@@ -92,7 +113,7 @@ test('can create and update todo', function () use ($createUserWithData) {
     auth()->guard()->login($user);
     $this->assertAuthenticated();
 
-    $response = $this->post('/api/todo', [
+    $response = $this->post('/api/todos', [
         'title' => 'My TODO list',
     ]);
     $todo = Todo::query()->where('id', $response->json('data.id'))->firstOrFail();
@@ -102,7 +123,7 @@ test('can create and update todo', function () use ($createUserWithData) {
     $this->assertEquals('My TODO list', $response->json('data.title'));
 
     // Update
-    $response = $this->put('/api/todo/' . $todo->id, [
+    $response = $this->put('/api/todos/' . $todo->id, [
         'title' => 'My TODO list (updated)',
     ]);
     $todo = Todo::query()->where('id', $response->json('data.id'))->firstOrFail();
@@ -124,7 +145,7 @@ test('can get todo with items', function () use ($createUserWithData) {
         )
         ->create(['user_id' => $user->id]);
 
-    $response = $this->get('/api/todo/' . $todo->id);
+    $response = $this->get('/api/todos/' . $todo->id);
     $todo = Todo::query()->where('id', $response->json('id'))->with('items')->firstOrFail();
 
     $response->assertSuccessful();
@@ -145,7 +166,7 @@ test('can delete todo', function () use ($createUserWithData) {
         ->refresh()
         ->load('items');
 
-    $response = $this->delete('/api/todo/' . $todo->id);
+    $response = $this->delete('/api/todos/' . $todo->id);
     $response->assertSuccessful();
 
     foreach ($todo->items as $item) {
@@ -158,12 +179,12 @@ test('can create and update todo items', function () use ($createUserWithData) {
     auth()->guard()->login($user);
     $this->assertAuthenticated();
 
-    $response = $this->post('/api/todo', [
+    $response = $this->post('/api/todos', [
         'title' => 'My TODO list',
     ]);
     $todo = Todo::query()->where('id', $response->json('data.id'))->firstOrFail();
 
-    $response = $this->post('/api/todo/' . $todo->id . '/item', [
+    $response = $this->post('/api/todos/' . $todo->id . '/item', [
         'content' => 'First task',
     ]);
     $item = TodoItem::query()->where('id', $response->json('data.id'))->firstOrFail();
@@ -178,17 +199,17 @@ test('can delete todo item', function () use ($createUserWithData) {
     auth()->guard()->login($user);
     $this->assertAuthenticated();
 
-    $response = $this->post('/api/todo', [
+    $response = $this->post('/api/todos', [
         'title' => 'My TODO list',
     ]);
     $todo = Todo::query()->where('id', $response->json('data.id'))->firstOrFail();
 
-    $this->post('/api/todo/' . $todo->id . '/item', [
+    $this->post('/api/todos/' . $todo->id . '/item', [
         'content' => 'First task',
     ]);
 
     $item = $todo->items->first();
-    $this->delete('/api/todo/' . $todo->id . '/item/' . $item->id);
+    $this->delete('/api/todos/' . $todo->id . '/item/' . $item->id);
 
     $this->assertNotTrue((bool) TodoItem::query()->find($item->id));
 });
