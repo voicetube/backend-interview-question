@@ -18,17 +18,11 @@ Route::namespace('Todo')
     ->prefix('todos')
     ->group(function () {
 //        Route::get('/', 'REPLACE_WITH_YOUR_CLASS');
-    });
-
-Route::namespace('Todo')
-    ->middleware(['api', 'auth:api'])
-    ->prefix('todo')
-    ->group(function () {
 //        Route::get('/{todoId}', 'REPLACE_WITH_YOUR_CLASS');
 //        Route::post('/', 'REPLACE_WITH_YOUR_CLASS');
 //        Route::put('/{todoId}', 'REPLACE_WITH_YOUR_CLASS');
 //        Route::delete('/{todoId}', 'REPLACE_WITH_YOUR_CLASS');
-//
+
         Route::post('/{todoId}/item', 'Item\CreateOrUpdateItem');
         Route::put('/{todoId}/item/{itemId}', 'Item\CreateOrUpdateItem');
 //        Route::delete('/{todoId}/item/{itemId}', 'REPLACE_WITH_YOUR_CLASS');
@@ -47,4 +41,5 @@ Route::namespace('Auth')
     ->group(function () {
 //        Route::post('refresh', 'REPLACE_WITH_YOUR_CLASS');
 //        Route::get('me', 'REPLACE_WITH_YOUR_CLASS');
+//        Route::get('token', 'REPLACE_WITH_YOUR_CLASS');
     });
